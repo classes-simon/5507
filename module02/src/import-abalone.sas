@@ -6,7 +6,7 @@
 Import the Abalone age prediction file.
 
 Tell SAS where to find the data. Notice that
-the filename statement includes a directl link
+the filename statement includes a direct link
 to the website that has this data.
 ********* ********* ********* ********* *********;
 

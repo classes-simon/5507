@@ -70,7 +70,7 @@ You've already imported a file similar to this. It is a space delimited file wit
 
 ### Space delimited, SAS code
 
-```{r import-space-delimited.sas}
+```{r code-02-01(import-space-delimited).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
@@ -104,7 +104,7 @@ Note that multiple blanks as a delimiter is not a problem, but try to avoid this
 
 ### Multi-space delimited, SAS code
 
-```{r import-multi-delimited.sas}
+```{r code-02-02(import-multi-delimited).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
@@ -138,7 +138,7 @@ Here's a simple example of a comma delimited file.
 
 ### Comma delimited, SAS code
 
-```{r import-comma-delimited.sas}
+```{r code-02-03(import-comma-delimited).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
@@ -172,7 +172,7 @@ Here's a simple example of a tilde delimited file.
 
 ### Tilde delimited, SAS code
 
-```{r import-tilde-delimited.sas}
+```{r code-02-04(import-tilde-delimited).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
@@ -222,7 +222,7 @@ You can also detect tabs by opening the file in a text editor like notebook and 
 
 ### Tab delimited, SAS code
 
-```{r import-tab-delimited.sas}
+```{r code-02-05(import-tab-delimited).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
@@ -266,7 +266,7 @@ In the fixed width file above, you would have to be told there are three numbers
 
 ### Fixed width, SAS code
 
-```{r import-fixed-width.sas}
+```{r code-02-06(import-fixed-width).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
@@ -301,7 +301,7 @@ Here's a small text file with a string of four to six letters.
 
 ### String data, SAS code
 
-```{r import-string-data.sas}
+```{r code-02-07(import-string-data).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
@@ -357,7 +357,7 @@ opts_current$get("label") %>%
 
 ### First line names, SAS code
 
-```{r import-first-line-names.sas}
+```{r code-02-08(import-first-line-names).sas}
 opts_current$get("label") %>%
   readLines(warn=FALSE) %>%
   strip_documentation %>%
