@@ -1,8 +1,12 @@
 ---
-title: "Importing a wide range of data formats"
+title: "V02. Importing a wide range of data formats"
 author: "Steve Simon"
 date: "7/1/2019"
-output: powerpoint_presentation
+output:
+  powerpoint_presentation: default
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding,
+  output_dir = "../results", output_format = "all") })  
 ---
 
 
