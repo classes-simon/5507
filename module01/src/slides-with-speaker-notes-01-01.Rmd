@@ -16,11 +16,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Documentation
 
-This PowerPoint presentation was written by Steve Simon in 2018-08-29 and was last modified on `r Sys.Date()`. It uses R Markdown, though the actual R code is fairly minimal. You can find the file that created this presentation on my [github repository](https://github.com/pmean/introduction-to-SAS).
+This PowerPoint presentation was written by Steve Simon in 2018-08-29 and was last modified on `r Sys.Date()`. It uses R Markdown, though the actual R code is fairly minimal. You can find the file that created this presentation on my [github repository](https://github.com/classes-medb/5507/blob/master/module01/src/slides-with-speaker-notes-01-01.Rmd).
 
 <div class="notes">
 
 [[Speaker notes]]
+
+This talk is written using R Markdown, which produces a nice Powerpoint file with speaker notes. You can find the original R Markdown code on my github site.
 
 Okay. I want to get you started using SAS. It's either going to be really easy or it's going to be really really hard. I want to give you as much guidance as I can without staring over your shoulder. Just quickly, I wrote this Powerpoint presentation and all the Powerpoint presentations using R Markdown. If you are curious I have a repository. It has some beautiful output.
 

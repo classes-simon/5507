@@ -1,13 +1,28 @@
 ---
-title: "History of SAS"
+title: "V01-02. History of SAS"
 author: "Steve Simon"
-date: "8/12/2019"
-output: powerpoint_presentation
+output:
+  powerpoint_presentation: default
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding,
+  output_dir = "../results", output_format = "all") })  
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+### Documentation
+
+This PowerPoint presentation was written by Steve Simon in 2019-08-12 and was last modified on `r Sys.Date()`. It uses R Markdown, though the actual R code is fairly minimal. You can find the file that created this presentation on my [github repository](https://github.com/classes-medb/5507/blob/master/module01/src/slides-with-speaker-notes-01-02.Rmd).
+
+<div class="notes">
+
+[[Speaker notes]]
+
+This talk is written using R Markdown, which produces a nice Powerpoint file with speaker notes. You can find the original R Markdown code on my github site.
+
+</div>
 
 ### Getting started
 
