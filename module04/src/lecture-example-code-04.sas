@@ -1,9 +1,9 @@
-options papersize=(8in 4in) nodate;
-proc printto log="lecture02.log" new; run;
-
 * lecture02.sas
   written by Steve Simon
   October 22, 2018;
+
+options papersize=(8in 4in) nodate;
+proc printto log="lecture02.log" new; run;
 
 ********* ********* ********* *********
 1. Output and data locations

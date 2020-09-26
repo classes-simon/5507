@@ -1,0 +1,360 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.00 seconds
+      
+
+1257  
+1258  ********* ********* ********* ********* *********
+1259  
+1260    Before you start any serious SAS programming,
+1261    tell SAS where everything belongs
+1262  
+1263    The filename statement tells SAS where you
+1264    have placed your raw data file.
+1265  
+1266    The libname statement tells SAS where you want
+1267    it to place any permanent SAS data files.
+1268  
+1269    The ods statement tells SAS where to store your
+1270    output and in what format.
+1271  
+1272    VERY IMPORTANT! You need to turn off ODS at the
+1273    completion of your program or none of the
+1274    output gets saved.
+1275  
+1276    You can view the output on the screen and then
+1277    save the output manually, but it is good form
+1278    to explicity specify the location of output in
+1279    your program.
+1280  
+1281  ********* ********* ********* ********* *********;
+1282  
+1283  filename fat "q:/5507/module03/data/fat.txt";
+1284  
+1285  libname intro "q:/5507/module03/data";
+NOTE: Libref INTRO was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: q:\5507\module03\data
+1286  
+1287  ods pdf file="q:/5507/module03/results/code-03-01-lecture.pdf";
+NOTE: Writing ODS PDF output to DISK destination "q:\5507\module03\results\code-03-01-lecture.pdf", printer "PDF".
+1288  
+1289  ********* ********* ********* ********* *********
+1290  
+1291   The data statement creates a new data set. If
+1292    you want a permanent data set, specify a two part
+1293    name. The part before the period is the libname
+1294    and tells SAS where to store your file. The part
+1295    after the period gives the name of the file. By
+1296    default, all SAS files use the extension .sas7bdat
+1297  
+1298    The infile statement tells SAS where to find the
+1299    raw data. The delimiter option tells SAS how to
+1300    tell when one number stops and when another
+1301    begins. In this example, spaces are delimiters.
+1302  
+1303    The input statement tells SAS what the names are
+1304    for the variables you are reading in.
+1305  
+1306    The label statement provides descriptive labels
+1307    for your variables. You can use special characters
+1308    like parentheses, slashes, and dashes that would
+1309    not be allowed in a variable name. The variable
+1310    label provides you with the opportunity to give
+1311    a more detailed description of your variable,
+1312    including the units of measurement. The variable
+1313    labels will appear on some of the SAS output,
+1314    which helps you clarify what the tables and
+1315    graphs are representing.
+1316  
+1317    The run statement tells SAS that you are ready
+1318    to go and there is nothing more to input or
+1319    manipulate.                                         ;
+1320  
+1321  ********* ********* ********* ********* *********;
+1322  
+1323  data intro.fat;
+1324    infile fat delimiter=' ';
+1325    input
+1326      case
+1327      fat_b
+1328      fat_s
+1329      dens
+1330      age
+1331      wt
+1332      ht
+1333      bmi
+1334      ffw
+1335      neck
+1336      chest
+1337      abdomen
+1338      hip
+1339      thigh
+1340      knee
+1341      ankle
+1342      biceps
+1343      forearm
+1344      wrist;
+1345    label
+1346      case="Case number"
+1347      fat_b="Percentage body fatusing Brozek's equation, 457/Density - 414.2"
+1348      fat_s="Percent body fat using Siri's equation, 495/Density - 450"
+1349      dens="Density"
+1350      age="Age (yrs)"
+1351      wt="Weight (lbs)"
+1352      ht="Height (inches)"
+1353      bmi="Adiposity index = Weight/Height^2 (kg/m^2)"
+1354      ffw="Fat Free Weight = (1 - fraction of body fat) * Weight using Brozek's formula (lbs)"
+1355      neck="Neck circumference (cm)"
+1356      chest="85  Chest circumference (cm)"
+1357      abdomen="Abdomen circumference (cm) at the umbilicus and level with the iliac crest"
+1358      hip="Hip circumference (cm)"
+1359      thigh="Thigh circumference (cm)"
+1360      knee="Knee circumference (cm)"
+1361      ankle="Ankle circumference (cm)"
+1362      biceps="Extended biceps circumference (cm)"
+1363      forearm="Forearm circumference (cm)"
+1364      wrist="Wrist circumference (cm) distal to the styloid processes"
+1365    ;
+1366  run;
+
+NOTE: The infile FAT is:
+      Filename=q:\5507\module03\data\fat.txt,
+      RECFM=V,LRECL=32767,File Size (bytes)=37758,
+      Last Modified=01Sep2020:11:57:31,
+      Create Time=26Sep2020:13:21:37
+
+NOTE: 252 records were read from the infile FAT.
+      The minimum record length was 147.
+      The maximum record length was 149.
+NOTE: The data set INTRO.FAT has 252 observations and 19 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.21 seconds
+      cpu time            0.04 seconds
+      
+
+1367  
+1368  ********* ********* ********* ********* *********
+1369    It's always a good idea to print out a small
+1370    piece of your data to make sure everything
+1371    is okay.
+1372  
+1373    The data option tells SAS what data set you
+1374    want to print. If you omit this, SAS will
+1375    print the most recently created data set.
+1376  
+1377    The obs=10 option limits the number of rows
+1378    printed to the first 10. For large data sets,
+1379    you should always take advantage of this
+1380    option.
+1381  
+1382    The var statement limits the variables that
+1383    you print to those that you specify. Again,
+1384  
+1385    The title statement tells SAS to provide
+1386    a descriptive title at the top of the page
+1387    of output.
+1388  
+1389    The run statement says you're done with the
+1390    procedure.
+1391  
+1392  ********* ********* ********* ********* *********
+1393  
+1394  proc print
+1395      data=intro.fat(obs=10);
+1396    var case fat_b fat_s dens age;
+        ---
+        180
+
+ERROR 180-322: Statement is not valid or it is used out of proper order.
+
+1397    title1 "The first ten rows and five columns";
+1398    title2 "of the fat data set";
+1399  run;
+1400  
+1401  ods pdf close;
+NOTE: ODS PDF printed no output. 
+      (This sometimes results from failing to place a RUN statement before the ODS PDF CLOSE statement.)
+1402  * test.sas
+1403    written by Steve Simon
+1404    2020-09-25;
+1405  
+1406  options papersize=(8in 4in) nodate;
+1407  * proc printto log="lecture02.log" new; run;
+1408  
+1409  ********* ********* ********* ********* *********
+1410  
+1411    Before you start any serious SAS programming,
+1412    tell SAS where everything belongs
+1413  
+1414    The filename statement tells SAS where you
+1415    have placed your raw data file.
+1416  
+1417    The libname statement tells SAS where you want
+1418    it to place any permanent SAS data files.
+1419  
+1420    The ods statement tells SAS where to store your
+1421    output and in what format.
+1422  
+1423    VERY IMPORTANT! You need to turn off ODS at the
+1424    completion of your program or none of the
+1425    output gets saved.
+1426  
+1427    You can view the output on the screen and then
+1428    save the output manually, but it is good form
+1429    to explicity specify the location of output in
+1430    your program.
+1431  
+1432  ********* ********* ********* ********* *********;
+1433  
+1434  filename fat "q:/5507/module03/data/fat.txt";
+1435  
+1436  libname intro "q:/5507/module03/data";
+NOTE: Libref INTRO was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: q:\5507\module03\data
+1437  
+1438  ods pdf file="q:/5507/module03/results/code-03-01-lecture.pdf";
+NOTE: Writing ODS PDF output to DISK destination "q:\5507\module03\results\code-03-01-lecture.pdf", printer "PDF".
+1439  
+1440  ********* ********* ********* ********* *********
+1441  
+1442   The data statement creates a new data set. If
+1443    you want a permanent data set, specify a two part
+1444    name. The part before the period is the libname
+1445    and tells SAS where to store your file. The part
+1446    after the period gives the name of the file. By
+1447    default, all SAS files use the extension .sas7bdat
+1448  
+1449    The infile statement tells SAS where to find the
+1450    raw data. The delimiter option tells SAS how to
+1451    tell when one number stops and when another
+1452    begins. In this example, spaces are delimiters.
+1453  
+1454    The input statement tells SAS what the names are
+1455    for the variables you are reading in.
+1456  
+1457    The label statement provides descriptive labels
+1458    for your variables. You can use special characters
+1459    like parentheses, slashes, and dashes that would
+1460    not be allowed in a variable name. The variable
+1461    label provides you with the opportunity to give
+1462    a more detailed description of your variable,
+1463    including the units of measurement. The variable
+1464    labels will appear on some of the SAS output,
+1465    which helps you clarify what the tables and
+1466    graphs are representing.
+1467  
+1468    The run statement tells SAS that you are ready
+1469    to go and there is nothing more to input or
+1470    manipulate.                                         ;
+1471  
+1472  ********* ********* ********* ********* *********;
+1473  
+1474  data intro.fat;
+1475    infile fat delimiter=' ';
+1476    input
+1477      case
+1478      fat_b
+1479      fat_s
+1480      dens
+1481      age
+1482      wt
+1483      ht
+1484      bmi
+1485      ffw
+1486      neck
+1487      chest
+1488      abdomen
+1489      hip
+1490      thigh
+1491      knee
+1492      ankle
+1493      biceps
+1494      forearm
+1495      wrist;
+1496    label
+1497      case="Case number"
+1498      fat_b="Percentage body fatusing Brozek's equation, 457/Density - 414.2"
+1499      fat_s="Percent body fat using Siri's equation, 495/Density - 450"
+1500      dens="Density"
+1501      age="Age (yrs)"
+1502      wt="Weight (lbs)"
+1503      ht="Height (inches)"
+1504      bmi="Adiposity index = Weight/Height^2 (kg/m^2)"
+1505      ffw="Fat Free Weight = (1 - fraction of body fat) * Weight using Brozek's formula (lbs)"
+1506      neck="Neck circumference (cm)"
+1507      chest="85  Chest circumference (cm)"
+1508      abdomen="Abdomen circumference (cm) at the umbilicus and level with the iliac crest"
+1509      hip="Hip circumference (cm)"
+1510      thigh="Thigh circumference (cm)"
+1511      knee="Knee circumference (cm)"
+1512      ankle="Ankle circumference (cm)"
+1513      biceps="Extended biceps circumference (cm)"
+1514      forearm="Forearm circumference (cm)"
+1515      wrist="Wrist circumference (cm) distal to the styloid processes"
+1516    ;
+1517  run;
+
+NOTE: The infile FAT is:
+      Filename=q:\5507\module03\data\fat.txt,
+      RECFM=V,LRECL=32767,File Size (bytes)=37758,
+      Last Modified=01Sep2020:11:57:31,
+      Create Time=26Sep2020:13:21:37
+
+NOTE: 252 records were read from the infile FAT.
+      The minimum record length was 147.
+      The maximum record length was 149.
+NOTE: The data set INTRO.FAT has 252 observations and 19 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.23 seconds
+      cpu time            0.04 seconds
+      
+
+1518  
+1519  ********* ********* ********* ********* *********
+1520    It's always a good idea to print out a small
+1521    piece of your data to make sure everything
+1522    is okay.
+1523  
+1524    The data option tells SAS what data set you
+1525    want to print. If you omit this, SAS will
+1526    print the most recently created data set.
+1527  
+1528    The obs=10 option limits the number of rows
+1529    printed to the first 10. For large data sets,
+1530    you should always take advantage of this
+1531    option.
+1532  
+1533    The var statement limits the variables that
+1534    you print to those that you specify. Again,
+1535  
+1536    The title statement tells SAS to provide
+1537    a descriptive title at the top of the page
+1538    of output.
+1539  
+1540    The run statement says you're done with the
+1541    procedure.
+1542  
+1543  ********* ********* ********* ********* *********
+1544  
+1545  proc print
+1546      data=intro.fat(obs=10);
+1547    var case fat_b fat_s dens age;
+        ---
+        180
+
+ERROR 180-322: Statement is not valid or it is used out of proper order.
+
+1548    title1 "The first ten rows and five columns";
+1549    title2 "of the fat data set";
+1550  run;
+1551  
+1552  ods pdf close;
+NOTE: ODS PDF printed no output. 
+      (This sometimes results from failing to place a RUN statement before the ODS PDF CLOSE statement.)
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           41:53.73
+      cpu time            10.13 seconds
+      
