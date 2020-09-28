@@ -1,67 +1,30 @@
-* lecture01.sas
+* code-03-01-read-fat-data.sas
   written by Steve Simon
-  September 7, 2018;
+  2020-09-28;
+
+* Note: The options statement below insures that 
+  my output will fit easily on a PowerPont slide.
+  You should not use this option for your work;
+  
+options papersize=(8in 4in) nodate;
 
 ********* ********* ********* ********* *********;
 
-* Before you start any serious SAS programming,
+  Before you start any serious SAS programming,
   tell SAS where everything belongs
   
   The filename statement tells SAS where you 
   have placed your raw data file.                     
 
-  Before we start, let's review a couple of 
-  definitions. 
-
-  A **categorical variable** is a variable that
-  can only take on a small number of values. 
-  Each value is usually associated with a 
-  particular category.
-
-  Examples of categorical variables are
-
-  * sex (Male or Female),
-  * race (White, Black, Native American, etc.),
-  * cancer stage (I, II, III, or IV),
-  * birth delivery type (Vaginal, C-section). 
-
-  A **continuous variable** is a variable that
-  can take on a large number of possible values,
-  potentially any value in some interval.
-
-  Examples of continuous variables are
-
-  * Birth weight in grams,
-  * gestational age,
-  * fasting LDL level.
-
-  There are some variables that are on the 
-  boundary between categorical and continuous, 
-  but it is not worth quibbling about here. 
-
-  The point to remember is that the types of 
-  graphs that you use and the types of statistics
-  that you compute are dependent on many things,
-  but first and foremost on whether the variables
-  are categorical, continuous, or a mixture.
-
-  Today, you will see examples involving mostly
-  continuous variables.
-;
-
-%let path=q:/5507/module03;
-
-filename fat
-  "&path/data/fat.txt";
-
-* The libname statement tells SAS where you want
+  The libname statement tells SAS where you want
   it to place any permanent SAS data files            ;
   
-libname intro
-  "&path/data";
-
-* The ods statement tells SAS where to store your
-  output and in what format.        
+  The ods statement tells SAS where to store your
+  output and in what format.  
+  
+  I am printing to a png file to make it easier
+  to include the output in my Powerpoint
+  presentation. You should print to a pdf file.
   
   VERY IMPORTANT! You need to turn off ODS at the 
   completion of your program or none of the 
@@ -70,12 +33,24 @@ libname intro
   You can view the output on the screen and then
   save the output manually, but it is good form
   to explicity specify the location of output in 
-  your program                                        ;  
+  your program                                    
 
-ods pdf
-  file="&path/results/code-03-01-lecture.pdf";
+********* ********* ********* ********* *********;
 
-* The data statement creates a new data set. If 
+filename fat
+  "q:/5507/module03/data/fat.txt";
+
+libname intro
+  "q:/5507/module03/data";
+
+* You should use "ods pdf file="your-name.pdf";
+
+ods printer printer=png
+  file="q:/5507/module03/results/code-03-01.png";
+
+********* ********* ********* ********* *********
+
+  The data statement creates a new data set. If 
   you want a permanent data set, specify a two part
   name. The part before the period is the libname
   and tells SAS where to store your file. The part
@@ -103,7 +78,9 @@ ods pdf
   
   The run statement tells SAS that you are ready
   to go and there is nothing more to input or 
-  manipulate.                                         ;
+  manipulate.                                         
+
+********* ********* ********* ********* *********;;
 
 data intro.fat;
   infile fat delimiter=' ';

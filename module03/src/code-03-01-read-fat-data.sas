@@ -1,7 +1,11 @@
-* test.sas
+* code-03-01-read-fat-data.sas
   written by Steve Simon
-  2020-09-25;
+  2020-09-28;
 
+* Note: The options statement below insures that 
+  my output will fit easily on a PowerPont slide.
+  You should not use this option for your work;
+  
 options papersize=(8in 4in) nodate;
 
 ********* ********* ********* ********* *********
@@ -10,13 +14,17 @@ options papersize=(8in 4in) nodate;
   tell SAS where everything belongs
   
   The filename statement tells SAS where you 
-  have placed your raw data file. 
-  
+  have placed your raw data file.                     
+
   The libname statement tells SAS where you want
-  it to place any permanent SAS data files.
+  it to place any permanent SAS data files            ;
   
   The ods statement tells SAS where to store your
-  output and in what format.        
+  output and in what format.  
+  
+  I am printing to a png file to make it easier
+  to include the output in my Powerpoint
+  presentation. You should print to a pdf file.
   
   VERY IMPORTANT! You need to turn off ODS at the 
   completion of your program or none of the 
@@ -25,15 +33,20 @@ options papersize=(8in 4in) nodate;
   You can view the output on the screen and then
   save the output manually, but it is good form
   to explicity specify the location of output in 
-  your program.
+  your program                                    
 
-********* ********* ********* ********* *********;  
+********* ********* ********* ********* *********;
 
-filename fat "q:/5507/module03/data/fat.txt";
+filename fat
+  "q:/5507/module03/data/fat.txt";
 
-libname intro "q:/5507/module03/data";
+libname intro
+  "q:/5507/module03/data";
 
-ods printer printer=png file="q:/5507/module03/results/code-03-01-lecture.png";
+* You should use "ods pdf file="your-name.pdf";
+
+ods printer printer=png
+  file="q:/5507/module03/results/code-03-01.png";
 
 ********* ********* ********* ********* *********
 
@@ -44,6 +57,11 @@ ods printer printer=png file="q:/5507/module03/results/code-03-01-lecture.png";
   after the period gives the name of the file. By
   default, all SAS files use the extension .sas7bdat  
   
+  This data set did not have a header, a line
+  at the very top of the file that lists 
+  variable names. For files with a header, you
+  should consider using the import procedure.
+
   The infile statement tells SAS where to find the
   raw data. The delimiter option tells SAS how to
   tell when one number stops and when another
@@ -52,6 +70,42 @@ ods printer printer=png file="q:/5507/module03/results/code-03-01-lecture.png";
   The input statement tells SAS what the names are
   for the variables you are reading in.
   
+  I'm using the variable names provided but if
+  you create your own names, use brief (but 
+  descriptive) name for EVERY variable in your
+  data set. There's no precise rule, but names
+  should be around 8 characters long. Longer 
+  variable names make your typing tedious and 
+  much shorter variable names makes your code 
+  terse and cryptic.
+
+  I'm a bit more terse with these variable names
+  than I normally would be just to reduce the 
+  amount of typing you have to do.
+
+  You should avoid special symbols in your 
+  variable names especially symbols that are 
+  likely to cause confusion (the dash symbol,
+  for example, which is also the symbol for 
+  subtraction). You should also avoid blanks.
+  These rules are pretty much universal across
+  most statistical software packages.
+
+  There are times when you'd like to have a 
+  blank in your variable name and you can use
+  two special symbols in SAS (and most other 
+  statistical pacakges):
+
+  * the underscore symbol (above the minus key
+    on most keyboards) and
+  * the dot (period).
+
+  These symbols create some artificial spacing
+  that mimics the blanks. Another approach is 
+  "CamelCase" which is the mixture of upper and
+  lower case within a variable name with each 
+  uppercase designating the beginning of a new "word".
+
   The label statement provides descriptive labels
   for your variables. You can use special characters
   like parentheses, slashes, and dashes that would
@@ -65,7 +119,7 @@ ods printer printer=png file="q:/5507/module03/results/code-03-01-lecture.png";
   
   The run statement tells SAS that you are ready
   to go and there is nothing more to input or 
-  manipulate.                                         ;
+  manipulate.                                         
 
 ********* ********* ********* ********* *********;
 
@@ -91,30 +145,41 @@ data intro.fat;
     biceps
     forearm
     wrist;
+
+********* ********* ********* ********* *********
+
+The label statemet is optional, but strongly
+recommended. It attaches descrptive labels to
+your variables. These labels are used in some 
+(but not all) of the SAS output.
+
+********* ********* ********* ********* *********;
+
   label
     case="Case number"
-    fat_b="Percentage body fatusing Brozek's equation, 457/Density - 414.2"
-    fat_s="Percent body fat using Siri's equation, 495/Density - 450"
+    fat_b="Percent body fat, Brozek's equation"
+    fat_s="Percent body fat, Siri's equation"
     dens="Density"
     age="Age (yrs)"
     wt="Weight (lbs)"
     ht="Height (inches)"
-    bmi="Adiposity index = Weight/Height^2 (kg/m^2)"
-    ffw="Fat Free Weight = (1 - fraction of body fat) * Weight using Brozek's formula (lbs)"
+    bmi="Adiposity index (kg/m^2)"
+    ffw="Fat Free Weight"
     neck="Neck circumference (cm)"
-    chest="85  Chest circumference (cm)"
-    abdomen="Abdomen circumference (cm) at the umbilicus and level with the iliac crest"
+    chest="Chest circumference (cm)"
+    abdomen="Abdomen circumference (cm)"
     hip="Hip circumference (cm)"
     thigh="Thigh circumference (cm)"
     knee="Knee circumference (cm)"
     ankle="Ankle circumference (cm)"
     biceps="Extended biceps circumference (cm)"
     forearm="Forearm circumference (cm)"
-    wrist="Wrist circumference (cm) distal to the styloid processes"  
+    wrist="Wrist circumference (cm)"  
   ;
 run;
 
 ********* ********* ********* ********* *********
+
   It's always a good idea to print out a small 
   piece of your data to make sure everything
   is okay.
@@ -139,7 +204,7 @@ run;
   procedure.
   
 ********* ********* ********* ********* *********;
-
+  
 proc print
     data=intro.fat(obs=10);
   var case fat_b fat_s dens age;
@@ -147,5 +212,9 @@ proc print
   title2 "of the fat data set";
 run;
 
-ods pdf close;
+********* ********* ********* ********* *********
 
+  The output from this procedure shows the first
+  ten rows and five columns of the fat data.
+
+********* ********* ********* ********* *********;

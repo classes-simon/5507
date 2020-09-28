@@ -10,27 +10,132 @@ suppressMessages(suppressWarnings(library(dplyr)))
 suppressMessages(suppressWarnings(library(knitr)))
 suppressMessages(suppressWarnings(library(magrittr)))
 suppressMessages(suppressWarnings(library(stringr)))
+shorten <- function(x) {
+  if (length(x) > 14) {
+    x <- append(x[1:13], "...")
+  }
+  return(x)
+}
+p0 <- function(i) {
+  txt %>%
+    extract(note_beg[i]:note_end[i]) %>%
+    paste(collapse="\n")
+}
+p1 <- function(i) {
+  txt %>%
+    extract(code_beg[i]:code_end[i]) %>%
+    shorten %>%
+    append("```{}", 0) %>% 
+    append("```") %>% 
+    paste(collapse="\n")
+}
 ```
 
-## Test slide
-
-```{r}
-txt <- readLines("code-03-01-test.sas")[1:20]
-cat(paste(txt[1:5], collapse="\n"))
+```{r code-03-01-read-fat-data.sas}
+opts_current$get("label") %>%
+  readLines() -> txt
+txt %>% 
+  str_which(fixed("*********")) %>%
+  append(-1, 0) -> b
+n <- length(b)
+code_beg <- b[seq(1, n-1, by=2)] + 2
+code_end <- b[seq(2, n-1, by=2)] - 2
+note_beg <- c(NA, b[seq(2, n,   by=2)] + 2)
+note_end <- c(NA, b[seq(3, n,   by=2)] - 2)
 ```
+
+## code-03-01-readfat-data.sas, part 1
+
+`r p1(1)`
 
 <div class="notes">
 
-```{r}
-txt <- readLines("code-03-01-test.sas")[1:20]
-cat(paste(txt[1:5], collapse="\n"))
-```
+Here is a simple program to read in data. You already know how to do this, but it doesn't hurt to review things.
 
 </div>
 
-## Test image
+## code-03-01-readfat-data.sas, part 2
+
+`r p1(2)`
+
+<div class="notes">
+
+`r p0(2)`
+
+</div>
+
+## code-03-01-readfat-data.sas, part 3
+
+`r p1(3)`
+
+<div class="notes">
+
+`r p0(3)`
+
+</div>
+
+## code-03-01-readfat-data.sas, part 4
+
+`r p1(4)`
+
+<div class="notes">
+
+`r p0(4)`
+
+</div>
+
+## code-03-01-readfat-data.sas, part 5
+
+`r p1(5)`
+
+<div class="notes">
+
+`r p0(5)`
+
+</div>
+
+## code-03-01-readfat-data.sas, ouptut
 
 ![Ten rows of the fat dataset](../results/code-03-01-lecture.png)
+
+<div class="notes">
+
+`r p0(6)`
+
+</div>
+
+```{r code-03-02-proc-means.sas}
+opts_current$get("label") %>%
+  readLines() -> txt
+txt %>% 
+  str_which(fixed("*********")) %>%
+  append(-1, 0) -> b
+n <- length(b)
+code_beg <- b[seq(1, n-1, by=2)] + 2
+code_end <- b[seq(2, n-1, by=2)] - 2
+note_beg <- c(NA, b[seq(2, n,   by=2)] + 2)
+note_end <- c(NA, b[seq(3, n,   by=2)] - 2)
+```
+
+## code-03-02-proc-means.sas, part 1
+
+`r p1(1)`
+
+<div class="notes">
+
+Here's another simple program. I am splitting my programs into small pieces to make it easier to produce PowerPoint slides from the code, but you are encouraged to combine all these small pieces into one big program when you do the homework.
+
+</div>
+
+## code-03-02-proc-means.sas, part 2
+
+`r p1(2)`
+
+<div class="notes">
+
+`r p0(2)`
+
+</div>
 
 
 
