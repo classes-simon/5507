@@ -54,3 +54,24 @@ run;
   see something unusual like this.
 
 ********* ********* ********* ********* *********;
+   code 01 below this line
+   don't include this code
+
+ods printer printer=png
+  file="q:/5507/module03/results/code-03-03.png";
+
+proc sort
+    data=intro.fat;
+  by ht;
+run;
+
+proc print
+    data=intro.fat(obs=1);
+  title1 "The row with the smallest ht";
+run;
+
+* Clearly something is wrong. There's no way that a
+  person with such a small height would have such a
+  big weight.
+
+
