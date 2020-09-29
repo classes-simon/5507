@@ -47,6 +47,8 @@ proc means
 run;
 
 ********* ********* ********* ********* *********
+   code part 01 below this line
+   don't include this code
 
   There is an unusual data value for ht, 29.5 inches.
   While this is not totally outside the realm of
@@ -54,8 +56,6 @@ run;
   see something unusual like this.
 
 ********* ********* ********* ********* *********;
-   code 01 below this line
-   don't include this code
 
 ods printer printer=png
   file="q:/5507/module03/results/code-03-03.png";

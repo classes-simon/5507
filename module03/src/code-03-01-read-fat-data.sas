@@ -1,14 +1,40 @@
+**** comments below **** **** **** **** **** ****
+
+  This program shows how to analyze data with 
+  mostly continuous variables. It uses a dataset
+  with measurements of body fat. You can measure
+  body fat accurately using hydrostatic weighing,
+  a complex process where you weigh someone will
+  submersed in a tank of water. In addition, you
+  have measures of circumference at various body
+  locations. Measuring circumference is a lot 
+  faster and easier. Can these easy measures
+  predict body fat as measured by hydrostatic
+  weighing?
+  
+  A brief description of this file is available
+  at
+
+www.amstat.org/publications/jse/datasets/fat.txt
+
+  Here is the program header and an option that
+  is only needed for me so that my SAS output
+  will fit easily on a PowerPoint slide.
+
+**** comments above **** **** sas code below ****;
+
 * code-03-01-read-fat-data.sas
   written by Steve Simon
   2020-09-28;
 
-* Note: The options statement below insures that 
-  my output will fit easily on a PowerPont slide.
-  You should not use this option for your work;
-  
+**** sas code above **** **** **** **** **** ****;
+
 options papersize=(8in 4in) nodate;
 
-********* ********* ********* ********* *********
+ods printer printer=png
+  file="q:/5507/module03/results/code-03-01.png";
+
+**** comments below **** **** **** **** **** ****
 
   Before you start any serious SAS programming,
   tell SAS where everything belongs
@@ -17,25 +43,16 @@ options papersize=(8in 4in) nodate;
   have placed your raw data file.                     
 
   The libname statement tells SAS where you want
-  it to place any permanent SAS data files            ;
+  it to place any permanent SAS data files.
   
-  The ods statement tells SAS where to store your
-  output and in what format.  
-  
-  I am printing to a png file to make it easier
-  to include the output in my Powerpoint
-  presentation. You should print to a pdf file.
+  You should also include an ods statement to
+  store your output as a pdf file.
   
   VERY IMPORTANT! You need to turn off ODS at the 
   completion of your program or none of the 
   output gets saved.
   
-  You can view the output on the screen and then
-  save the output manually, but it is good form
-  to explicity specify the location of output in 
-  your program                                    
-
-********* ********* ********* ********* *********;
+**** comments above **** **** sas code below ****;
 
 filename fat
   "q:/5507/module03/data/fat.txt";
@@ -43,12 +60,7 @@ filename fat
 libname intro
   "q:/5507/module03/data";
 
-* You should use "ods pdf file="your-name.pdf";
-
-ods printer printer=png
-  file="q:/5507/module03/results/code-03-01.png";
-
-********* ********* ********* ********* *********
+**** sas code above **** **** comments below ****
 
   The data statement creates a new data set. If 
   you want a permanent data set, specify a two part
@@ -121,7 +133,7 @@ ods printer printer=png
   to go and there is nothing more to input or 
   manipulate.                                         
 
-********* ********* ********* ********* *********;
+**** comments above **** **** sas code below ****;
 
 data intro.fat;
   infile fat delimiter=' ';
@@ -146,14 +158,14 @@ data intro.fat;
     forearm
     wrist;
 
-********* ********* ********* ********* *********
+**** sas code above **** **** comments below ****
 
 The label statemet is optional, but strongly
 recommended. It attaches descrptive labels to
 your variables. These labels are used in some 
 (but not all) of the SAS output.
 
-********* ********* ********* ********* *********;
+**** comments above **** **** sas code below ****;
 
   label
     case="Case number"
@@ -178,7 +190,7 @@ your variables. These labels are used in some
   ;
 run;
 
-********* ********* ********* ********* *********
+**** sas code above **** **** comments below ****
 
   It's always a good idea to print out a small 
   piece of your data to make sure everything
@@ -203,8 +215,8 @@ run;
   The run statement says you're done with the
   procedure.
   
-********* ********* ********* ********* *********;
-  
+**** comments above **** **** sas code below ****;
+
 proc print
     data=intro.fat(obs=10);
   var case fat_b fat_s dens age;
@@ -212,9 +224,89 @@ proc print
   title2 "of the fat data set";
 run;
 
-********* ********* ********* ********* *********
+**** sas code above **** **** footnote below ****
 
   The output from this procedure shows the first
   ten rows and five columns of the fat data.
 
-********* ********* ********* ********* *********;
+**** footnote above **** **** comments below ****
+
+  The means procedure will produce descriptive 
+  statistics for your data. By default, it will
+  produce the count of non-missing values, the 
+  mean, the standard deviation, and the minimum
+  and maximum values, but I am listing them
+  explicitly here, just for show.
+  
+  The data option tells SAS which data set you
+  want descriptive statistics on, and the var
+  statement tells SAS which variable(s) you
+  want descriptive statistics on.
+
+  This data set did not have a header, a line
+  at the very top of the file that lists 
+  variable names. For files with a header, you
+  should consider using the import procedure,
+  which I will describe later.
+
+**** comments above **** **** **** **** **** ****;
+
+* Note: This ods statement below is needed for my
+  PowerPoint slides. You should not include this
+  in your work.;
+
+ods printer printer=png
+  file="q:/5507/module03/results/code-03-03.png";
+
+**** **** **** **** **** **** sas code below ****;
+
+proc means
+    n mean std min max
+    data=intro.fat;
+  var ht;
+  title1 "Simple descriptive statistics for ht";
+  title2 "Notice the unusual minimum value";
+run;
+
+**** sas code above **** **** footnote below ****
+
+  There is an unusual data value for ht, 29.5
+  inches. While this is not totally outside the
+  realm of possibility, you should always ask
+  when you see something unusual like this.
+
+**** footnote above **** **** **** **** **** ****;
+
+* Note: This odcs statement below is needed for my
+  PowerPoint slides. You should not include this
+  in your work.;
+
+ods printer printer=png
+  file="q:/5507/module03/results/code-03-03.png";
+
+**** **** **** **** **** **** comments below ****
+
+  To investigate further, sort the data and print
+  the first observation.
+
+**** comments above **** **** sas code below ****;
+
+proc sort
+    data=intro.fat;
+  by ht;
+run;
+
+proc print
+    data=intro.fat(obs=1);
+  title1 "The row with the smallest ht";
+run;
+
+**** sas code above **** **** footnote below ****
+
+  Clearly something is wrong. There's no way that a
+  person with such a small height would have such a
+  big weight.
+
+
+**** footnote above **** **** comments below ****
+

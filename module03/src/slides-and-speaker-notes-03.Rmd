@@ -16,14 +16,22 @@ shorten <- function(x) {
   }
   return(x)
 }
-p0 <- function(i) {
+comments <- function(i) {
+  if ((i > length(comments_beg)) | (i > length(comments_end))) return("Error. No comments.")
   txt %>%
-    extract(note_beg[i]:note_end[i]) %>%
+    extract(comments_beg[i]:comments_end[i]) %>%
     paste(collapse="\n")
 }
-p1 <- function(i) {
+footnote <- function(i) {
+  if ((i > length(footnote_beg)) | (i > length(footnote_end))) return("Error. No footnote.")
   txt %>%
-    extract(code_beg[i]:code_end[i]) %>%
+    extract(footnote_beg[i]:footnote_end[i]) %>%
+    paste(collapse="\n")
+}
+sas_code <- function(i) {
+  if ((i > length(sas_code_beg)) | (i > length(sas_code_end))) return("Error. No sas code.")
+  txt %>%
+    extract(sas_code_beg[i]:sas_code_end[i]) %>%
     shorten %>%
     append("```{}", 0) %>% 
     append("```") %>% 
@@ -38,104 +46,112 @@ txt %>%
   str_which(fixed("*********")) %>%
   append(-1, 0) -> b
 n <- length(b)
-code_beg <- b[seq(1, n-1, by=2)] + 2
-code_end <- b[seq(2, n-1, by=2)] - 2
-note_beg <- c(NA, b[seq(2, n,   by=2)] + 2)
-note_end <- c(NA, b[seq(3, n,   by=2)] - 2)
+sas_code_beg <- str_which(txt, fixed("**** sas code below")) + 2
+sas_code_end <- str_which(txt, fixed("**** sas code above")) - 2
+comments_beg <- str_which(txt, fixed("**** comments below")) + 2
+comments_end <- str_which(txt, fixed("**** comments above")) - 2
+footnote_beg <- str_which(txt, fixed("**** footnote below")) + 2
+footnote_end <- str_which(txt, fixed("**** footnote above")) - 2
+
 ```
 
 ## code-03-01-readfat-data.sas, part 1
 
-`r p1(1)`
+`r sas_code(1)`
 
 <div class="notes">
 
-Here is a simple program to read in data. You already know how to do this, but it doesn't hurt to review things.
+`r comments(1)`
 
 </div>
 
 ## code-03-01-readfat-data.sas, part 2
 
-`r p1(2)`
+`r sas_code(2)`
 
 <div class="notes">
 
-`r p0(2)`
+`r comments(2)`
 
 </div>
 
 ## code-03-01-readfat-data.sas, part 3
 
-`r p1(3)`
+`r sas_code(3)`
 
 <div class="notes">
 
-`r p0(3)`
+`r comments(3)`
 
 </div>
 
 ## code-03-01-readfat-data.sas, part 4
 
-`r p1(4)`
+`r sas_code(4)`
 
 <div class="notes">
 
-`r p0(4)`
+`r comments(4)`
 
 </div>
 
 ## code-03-01-readfat-data.sas, part 5
 
-`r p1(5)`
+`r sas_code(5)`
 
 <div class="notes">
 
-`r p0(5)`
+`r comments(5)`
 
 </div>
 
-## code-03-01-readfat-data.sas, ouptut
+## code-03-01-readfat-data.sas, ouptut page 1
 
-![Ten rows of the fat dataset](../results/code-03-01-lecture.png)
+![Ten rows of the fat dataset](../results/code-03-01.png)
 
 <div class="notes">
 
-`r p0(6)`
+`r footnote(1)`
 
 </div>
 
-```{r code-03-02-proc-means.sas}
-opts_current$get("label") %>%
-  readLines() -> txt
-txt %>% 
-  str_which(fixed("*********")) %>%
-  append(-1, 0) -> b
-n <- length(b)
-code_beg <- b[seq(1, n-1, by=2)] + 2
-code_end <- b[seq(2, n-1, by=2)] - 2
-note_beg <- c(NA, b[seq(2, n,   by=2)] + 2)
-note_end <- c(NA, b[seq(3, n,   by=2)] - 2)
-```
+## code-03-01-readfat-data.sas, part 6
 
-## code-03-02-proc-means.sas, part 1
-
-`r p1(1)`
+`r sas_code(6)`
 
 <div class="notes">
 
-Here's another simple program. I am splitting my programs into small pieces to make it easier to produce PowerPoint slides from the code, but you are encouraged to combine all these small pieces into one big program when you do the homework.
+`r comments(6)`
 
 </div>
 
-## code-03-02-proc-means.sas, part 2
+## code-03-01-readfat-data.sas, ouptut page 2
 
-`r p1(2)`
+![Descriptive statistics for patient height](../results/code-03-02.png)
 
 <div class="notes">
 
-`r p0(2)`
+`r footnote(2)`
 
 </div>
 
+## code-03-01-readfat-data.sas, part 7
 
+`r sas_code(7)`
+
+<div class="notes">
+
+`r comments(7)`
+
+</div>
+
+## code-03-01-readfat-data.sas, ouptut page 3
+
+![Listing of outlier](../results/code-03-03.png)
+
+<div class="notes">
+
+`r footnote(3)`
+
+</div>
 
