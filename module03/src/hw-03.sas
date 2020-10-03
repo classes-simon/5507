@@ -13,6 +13,16 @@ libname binary
   questions for module03. There are other 
   approaches that may also be valid.
 
+  This program produces SAS output in individual
+  graphic images (png format) rather than as a
+  single pdf file. This makes it easier for me
+  to prepara a Powerpoint presentation. You, 
+  however, should not use this approach. Ignore
+  all the "ods printer" statements and use a
+  single "ods pdf" at the beginning of your
+  program and remember to put an "ods pdf close"
+  at the end of your program.
+
 **** comments_p2         **** **** **** **** ****
 
   This code presumes that you have read in the
@@ -224,9 +234,11 @@ ods printer printer=png
 **** sas_code_q4c        **** **** **** **** ****;
 
 proc sgplot
-    data=xfer;
-  histogram bodywt;
-  xaxis type=log;
+    data=log_weight;
+  histogram log_w;
+  xaxis
+    values=(-3, -2, -1, 0, 1, 2, 3, 4)
+    valuesdisplay=("0.001" "0.01" "0.1" "1" "10" "100" "1000" "10000");
   title1 "Histogram of log body weight";
 run;
 
